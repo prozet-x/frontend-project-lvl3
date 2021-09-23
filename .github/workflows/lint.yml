@@ -1,0 +1,13 @@
+name: lint
+on: push
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: preparing to linting
+        run: npm ci #without this linter will not work
+
+      - name: linting
+        run: make lint
