@@ -5,9 +5,17 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <form>
+    <form id="rssForm">
       <input type="text" name="adress" placeholder="Адрес RSS">
       <input type="submit" value="Получить">
     </form>
+    <div id="feedsContainer">
+      <div id="feedsHead">
+        <h1>Фиды</h1>
+      </div>
+      <div id="feeds">
+
+      </div>
+    </div>
   </body>
 </html>
