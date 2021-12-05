@@ -9,6 +9,7 @@ import onChange from 'on-change';
 const app = () => {
   const state = {
     feeds: [],
+    error: '',
   };
 
   const schema = yup
