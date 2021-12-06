@@ -6,16 +6,25 @@ import onChange from 'on-change';
 /* eslint no-undef: "error" */
 /* eslint-env browser */
 
+const render = (state) => {
+  
+};
+
 const app = () => {
   const state = {
     feeds: [],
     error: '',
   };
 
+  const noAdressErr = 'Нужно ввести адрес RSS-ленты!';
+  const notValidURLErr = 'Ссылка должна быть валидным URL!';
+
+  const watchedSate = onChange(state, () => render(state));
+
   const schema = yup
     .string()
-    .required('Нужно ввести адрес RSS-ленты!')
-    .url('Ссылка должна быть валидным URL!');
+    .required(noAdressErr)
+    .url(notValidURLErr);
 
   const rssForm = document.getElementById('rssForm');
   rssForm.addEventListener('submit', (e) => {
@@ -23,7 +32,7 @@ const app = () => {
     const rssAdressFromUser = document.getElementById('newRSSAdress').value;
     schema.validate(rssAdressFromUser)
     // .then((value) => )
-    .catch((err) => alert(err));
+      .catch((err) => { watchedSate.error = err.mesage; });
   });
 };
 
