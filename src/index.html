@@ -1,21 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <form id="rssForm">
-      <input type="text" id="newRSSAdress" name="adress" placeholder="Адрес RSS">
-      <input type="submit" value="Получить">
-    </form>
-    <div id="feedsContainer">
-      <div id="feedsHead">
-        <h1>Фиды</h1>
-      </div>
-      <div id="feeds">
 
+<head>
+  <meta charset="utf-8">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+</head>
+<!-- ВСЮ ВЕРСТКУ ПЕРЕТЯНУЛ ВНАГЛУЮ С ГОТОВОГО ПРОЕКТА ХЕКСЛЕТА. НАДО БЫ ПРОЙТИ ПАРУ КУРСОВ ПО БУТСТРАП 5, ДАБЫ НАУЧИТЬСЯ ПОЛЬЗОВАТЬСЯ ИМ И ПОНЯТЬ ПОЧЕМУ В ЭТОМ ПРОЕКТЕ ИСПОЛЬЗУЮТСЯ ТЕ ИЛИ ИНЫЕ КЛАССЫ БУТСТРАПА. -->
+
+<body class="d-flex flex-column min-vh-100">
+  <main class="flex-grow-1">
+    <section class="container-fluid bg-dark p-5">
+      <div class="row">
+        <div class="col-md-10 col-lg-8 mx-auto text-white">
+          <h1 class="display-3 mb-0">RSS агрегатор</h1>
+          <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
+          <form id="rssForm" class="rss-form text-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-floating">
+                  <input class="form-control w-100" type="text" id="newRSSAdress" name="adress" placeholder="Адрес RSS">
+                  <label for="url-input">Ссылка RSS</label>
+                </div>
+              </div>
+              <div class="col-auto">
+                <input type="submit" value="Добавить" class="h-100 btn btn-lg btn-primary px-sm-5">
+              </div>
+            </div>
+          </form>
+          <p class="mt-2 mb-0 text-muted">Пример: https://ru.hexlet.io/lessons.rss</p>
+          <p class="feedback m-0 position-absolute small text-danger"></p>
+        </div>
       </div>
-    </div>
-  </body>
+    </section>
+    <section class="container-fluid container-xxl p-5">
+      <div class="row">
+        <div class="col-md-10 col-lg-8 order-1 mx-auto posts"></div>
+        <div class="col-md-10 col-lg-4 mx-auto order-0 order-lg-1 feeds"></div>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>

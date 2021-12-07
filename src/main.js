@@ -18,21 +18,26 @@ const app = () => {
 
   const noAdressErr = 'Нужно ввести адрес RSS-ленты!';
   const notValidURLErr = 'Ссылка должна быть валидным URL!';
+  const RSSAlreadyExistErr = 'RSS уже существует!';
 
   const watchedSate = onChange(state, () => render(state));
 
   const schema = yup
     .string()
     .required(noAdressErr)
-    .url(notValidURLErr);
+    .url(notValidURLErr)
+    .notOneOf([state.feeds], RSSAlreadyExistErr);
 
   const rssForm = document.getElementById('rssForm');
   rssForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const rssAdressFromUser = document.getElementById('newRSSAdress').value;
     schema.validate(rssAdressFromUser)
-    // .then((value) => )
-      .catch((err) => { watchedSate.error = err.mesage; });
+      .then((value) => {
+        watchedSate.feeds.push(value);
+        watchedSate.error = '';
+      })
+      .catch((err) => { watchedSate.error = err.message; });
   });
 };
 
