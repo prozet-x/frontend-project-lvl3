@@ -6,8 +6,10 @@ import onChange from 'on-change';
 /* eslint no-undef: "error" */
 /* eslint-env browser */
 
+const errorDiv = document.getElementById('errorMessage');
+
 const render = (state) => {
-  
+  errorDiv.textContent = state.error;
 };
 
 const app = () => {
@@ -16,7 +18,6 @@ const app = () => {
     error: '',
   };
 
-  const noAdressErr = 'Нужно ввести адрес RSS-ленты!';
   const notValidURLErr = 'Ссылка должна быть валидным URL!';
   const RSSAlreadyExistErr = 'RSS уже существует!';
 
@@ -24,7 +25,6 @@ const app = () => {
 
   const schema = yup
     .string()
-    .required(noAdressErr)
     .url(notValidURLErr)
     .notOneOf([state.feeds], RSSAlreadyExistErr);
 
