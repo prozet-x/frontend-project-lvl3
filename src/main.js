@@ -7,9 +7,15 @@ import onChange from 'on-change';
 /* eslint-env browser */
 
 const errorDiv = document.getElementById('errorMessage');
+const inputRSSDivEl = document.getElementById('newRSSAdress');
 
 const render = (state) => {
   errorDiv.textContent = state.error;
+  if (state.error) {
+    inputRSSDivEl.classList.add('is-invalid');
+  } else {
+    inputRSSDivEl.classList.remove('is-invalid');
+  }
 };
 
 const app = () => {
