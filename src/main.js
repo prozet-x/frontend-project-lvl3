@@ -22,6 +22,7 @@ const app = () => {
   const state = {
     feeds: [],
     error: '',
+    news: [],
   };
 
   const notValidURLErr = 'Ссылка должна быть валидным URL!';
