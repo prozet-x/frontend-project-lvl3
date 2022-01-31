@@ -6,6 +6,22 @@ import onChange from 'on-change';
 /* eslint no-undef: "error" */
 /* eslint-env browser */
 
+class news {
+  constructor() {
+    this.news = [];
+    this.maxId = 0;
+  }
+
+  addNews(channelId, name) {
+    this.news.push({
+      id: this.maxId,
+      channelId,
+      name,
+    });
+    this.maxId += 1;
+  }
+}
+
 const errorDiv = document.getElementById('errorMessage');
 const inputRSSDivEl = document.getElementById('newRSSAdress');
 
