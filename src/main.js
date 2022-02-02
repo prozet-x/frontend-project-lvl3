@@ -42,12 +42,12 @@ const app = () => {
   const schema = yup
     .string()
     .url(notValidURLErr)
-    .notOneOf(state.feeds.getAllFeedsURLs(), RSSAlreadyExistErr);
+    .notOneOf([state.feeds.urls], RSSAlreadyExistErr);
 
   const rssForm = document.getElementById('rssForm');
   rssForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert(state.feeds.getAllFeedsURLs());
+    // alert(state.feeds.getAllFeedsURLs());
     const rssAdressFromUser = document.getElementById('newRSSAdress').value;
     schema.validate(rssAdressFromUser)
       .then((value) => {

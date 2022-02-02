@@ -1,20 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 class Feeds {
   constructor() {
-    this.feeds = [];
-    this.maxId = 0;
+    this.urls = [];
+    this.names = [];
   }
 
   addNewFeed(url, name) {
-    this.feeds.push({
-      id: this.maxId,
-      url,
-      name,
-    });
-    this.maxId += 1;
+    this.urls.push(url);
+    this.names.push(name);
   }
-
-  getAllFeedsURLs = () => this.feeds.map((elem) => elem.url);
 }
 
 export default Feeds;
