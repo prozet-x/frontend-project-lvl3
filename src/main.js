@@ -8,13 +8,14 @@ import Feeds from './classes/classFeeds';
 /* eslint no-undef: "error" */
 /* eslint-env browser */
 
-const errorDiv = document.getElementById('errorMessage'); // div. Содержит описание ошибки при попытке ввести адрес RSS-ленты
+const addingStatusDivEl = document.getElementById('addingStatusMessage'); // div. Содержит описание ошибки при попытке ввести адрес RSS-ленты
 const inputRSSDivEl = document.getElementById('newRSSAdress'); // input. Сюда вводим новый адрес RSS-ленты
 
 const renderError = (stateError) => { // Отрисовывает изменение ошибки при вводе новой RSS-ленты
-  errorDiv.textContent = stateError.error;
+  addingStatusDivEl.textContent = stateError.error;
   if (stateError.error) {
     inputRSSDivEl.classList.add('is-invalid');
+    inputRSSDivEl.classList.remove('text-success');
   } else {
     inputRSSDivEl.classList.remove('is-invalid');
   }
@@ -27,7 +28,7 @@ const render = (state) => {
 const app = () => {
   const state = {
     feeds: new Feeds(),
-    error: { error: '' },
+    status: { status: '' },
     news: new News(),
   };
 
@@ -36,7 +37,7 @@ const app = () => {
 
   // const watchedSate = onChange(state, () => render(state));
   const watchedStateFeeds = onChange(state.feeds, () => render(state));
-  const watchedStateError = onChange(state.error, () => render(state));
+  const watchedStateStatus = onChange(state.error, () => render(state));
   const watchedStateNews = onChange(state.news, () => render(state));
 
   const schema = yup
@@ -52,7 +53,7 @@ const app = () => {
     schema.validate(rssAdressFromUser)
       .then((value) => {
         watchedStateFeeds.addNewFeed(value, 'TEST NAME');
-        watchedStateError.error = '';
+        watchedStateStatus.status = '';
       })
       .catch((err) => { watchedStateError.error = err.message; });
   });
