@@ -10,7 +10,7 @@ import News from './classes/classNews'; // Это мой класс для хр�
 import Feeds from './classes/classFeeds'; // А это класс для хранения лент новостей
 import renderStatus from './view';
 
-const addingStatusDivEl = document.getElementById('addingStatusMessage'); // div. Содержит описание ошибки при попытке ввести адрес RSS-ленты
+const addingStatusPEl = document.getElementById('addingStatusMessage'); // Абзац. Содержит описание ошибки при попытке ввести адрес RSS-ленты
 const inputRSSDivEl = document.getElementById('newRSSAdress'); // input. Сюда вводим новый адрес RSS-ленты
 
 /* const renderStatus = (stateStatus, path, newValue) => { // Отрисовывает изменение статуса при вводе новой RSS-ленты
@@ -33,7 +33,7 @@ const inputRSSDivEl = document.getElementById('newRSSAdress'); // input. Сюд�
 }; */
 
 const render = (state, path, newValue, prevValue) => {
-  renderStatus(state.status);
+  // renderStatus(state.status);
 };
 
 const app = () => {
@@ -41,7 +41,7 @@ const app = () => {
     feeds: new Feeds(), // Тут будут новостные ленты.
     status: { // Тут - статус попытки добавить новую ленту.
       status: '', // Содержит текст, который будет выведет при попытке добавить новую ленту.
-      error: false, // Флаг ошибки. Если ввели неверный адрес RSS, то будет истиной. Если верный - ложью.
+      error: true, // Флаг ошибки. Если ввели неверный адрес RSS, то будет истиной. Если верный - ложью.
     },
     news: new News(), // Ну, а тут будут сами новости. По всем новостным лентам.
   };
@@ -51,7 +51,7 @@ const app = () => {
   const successAddedRSSText = 'RSS успешно загружен'; // Это выведем текстом, если юзер ввел RSS-ленту, и проблем при этом не возникло. То есть, он добавил новую, и все хорошо.
 
   const watchedStateFeeds = onChange(state.feeds, () => render(state));
-  const watchedStateStatus = onChange(state.status, (path, newValue) => renderStatus(addingStatusDivEl, inputRSSDivEl, state.status, path, newValue)); // Вотчер, следящий за статусом попытки добавления новой RSS-ленты юзером.
+  const watchedStateStatus = onChange(state.status, (path, newValue) => renderStatus(addingStatusPEl, inputRSSDivEl, state.status, path, newValue)); // Вотчер, следящий за статусом попытки добавления новой RSS-ленты юзером.
   const watchedStateNews = onChange(state.news, () => render(state));
 
   const schema = yup // Строим схему для проверки ввода пользователем адреса RSS-ленты
