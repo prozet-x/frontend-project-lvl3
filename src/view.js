@@ -1,15 +1,14 @@
 /* eslint-disable max-len */
 // Отрисовывает изменение статуса при вводе новой RSS-ленты
 // Параметры:
-//   - addingStatusDivElParam - div для вывода статуса попытки добавления RSS-ленты
+//   - addingStatusPElParam - параграф для вывода статуса попытки добавления RSS-ленты
 //   - inputRSSDivElParam - input, в который юзер ввел адрес RSS-ленты
-//   - status - стейт состояния
 //   - path - путь в стейте состояния, по которому произошли изменения
 //   - newValue - то, что ввел пользователь
-const renderStatus = (addingStatusPElParam, inputRSSDivElParam, status, path, newValue) => {
+const renderStatus = (addingStatusPElParam, inputRSSDivElParam, path, newValue) => {
   const addingStatusPEl = addingStatusPElParam; // Присваиваем параметр в переменную, так как линтер ругается на прямые манипуляции с параметрами.
   const inputRSSDivEl = inputRSSDivElParam; // -||-
-  if (path === 'status') { // Если поменялся статус (то есть, текст)
+  if (path === 'text') { // Если поменялся статус (то есть, текст)
     addingStatusPEl.textContent = newValue; // Покажем этот статус юзеру
     return; // и прекратим тут работать далее.
   }
@@ -27,4 +26,12 @@ const renderStatus = (addingStatusPElParam, inputRSSDivElParam, status, path, ne
   }
 };
 
-export default renderStatus;
+const renderFormAvailability = (elements, isAvailable) => {
+  if (isAvailable) {
+    elements.foreach((elem) => elem.removeAttribute('disabled'));
+  } else {
+    elements.foreach((elem) => elem.setAttribute('disabled', ''));
+  }
+};
+
+export { renderStatus, renderFormAvailability };
